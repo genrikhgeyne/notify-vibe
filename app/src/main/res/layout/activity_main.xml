@@ -36,30 +36,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/circularProgressBar" />
 
-    <!--    <Button-->
-    <!--        android:id="@+id/buttonProgress"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Change"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/circularProgressBar" />-->
-
-    <!--    <View-->
-    <!--        android:id="@+id/backgroundFirstTask"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:background="#808080"-->
-    <!--        android:alpha="0.5"-->
-    <!--        android:padding="10dp"-->
-
-    <!--        app:layout_constraintBottom_toBottomOf="@id/textFirstTask"-->
-    <!--        app:layout_constraintEnd_toEndOf="@id/checkBoxFirstTask"-->
-    <!--        app:layout_constraintStart_toStartOf="@id/textFirstTask"-->
-    <!--        app:layout_constraintTop_toTopOf="@id/textFirstTask"/>-->
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tasksRecycler"
         android:layout_width="match_parent"
@@ -69,8 +45,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/circularProgressBar" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

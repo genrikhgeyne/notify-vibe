@@ -1,11 +1,13 @@
 package com.example.polytechandroidclasses
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.polytechandroidclasses.databinding.ActivityMainBinding
-import com.example.polytechandroidclasses.databinding.TaskItemBinding
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -30,59 +32,59 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-//        val changeProgressButton = findViewById<Button>(R.id.buttonProgress)
-//        val circularProgressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
-//        val progressText = findViewById<TextView>(R.id.textProgress)
-
-//        changeProgressButton.setOnClickListener {
-//            circularProgressBar.apply {
-//                if (progress < 100f) {
-//                    progressText.text = getString(
-//                        R.string.progress_text,
-//                        (progress + 20f).roundToInt()
-//                    )
-//                    setProgressWithAnimation(progress + 20f, 1000)
-//                } else {
-//                    setProgressWithAnimation(0f, 1000)
-//                    progressText.text = getString(R.string.progress_text, 0)
-//                }
-//
-//            }
-//        }
     }
 
-    private fun taskItemClicked(taskItem : TaskData) {
-        Toast.makeText(this, "Clicked: ${taskItem.taskText}", Toast.LENGTH_LONG).show()
+    @SuppressLint("NotifyDataSetChanged")
+    private fun taskItemClicked(taskItem: TaskData) {
+        taskItem.taskStatus = !taskItem.taskStatus
 
-//        taskItem.taskStatus != taskItem.taskStatus
-//        taskItem.getItemId()
-//
-//        binding.tasksRecycler.adapter?.getBindingAdapterPosition()
-//        binding.tasksRecycler.adapter?.notifyItemChanged()
+        binding.tasksRecycler.adapter?.notifyDataSetChanged()
 
-        // Launch second activity, pass part ID as string parameter
-//        val showDetailActivityIntent = Intent(this, PartDetailActivity::class.java)
-//        showDetailActivityIntent.putExtra(Intent.EXTRA_TEXT, taskItem.id.toString())
-//        startActivity(showDetailActivityIntent)
+        val circularProgressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
+        val progressText = findViewById<TextView>(R.id.textProgress)
+
+        val step = 100.toFloat() / binding.tasksRecycler.adapter!!.itemCount
+
+        circularProgressBar.apply {
+            if (taskItem.taskStatus) {
+                progressText.text = getString(
+                    R.string.progress_text,
+                    (progress + step).roundToInt()
+                )
+                setProgressWithAnimation(progress + step, 1000)
+            } else {
+                progressText.text = getString(
+                    R.string.progress_text,
+                    (progress - step).roundToInt()
+                )
+                setProgressWithAnimation(progress - step, 1000)
+            }
+        }
+
+
     }
 
-    private fun createTestData() : List<TaskData> {
+    private fun createTestData(): List<TaskData> {
         val taskList = ArrayList<TaskData>()
-        taskList.add(TaskData("Take medications", false))
-        taskList.add(TaskData("Water the flower", true))
-        taskList.add(TaskData("Wash dishes", false))
-        taskList.add(TaskData("Take medications Take medications Take medications Take medications Take medications Take medications", false))
-        taskList.add(TaskData("Water the flower", true))
-        taskList.add(TaskData("Wash dishes", false))
-        taskList.add(TaskData("Take medications", false))
-        taskList.add(TaskData("Water the flower", true))
-        taskList.add(TaskData("Wash dishes", false))
-        taskList.add(TaskData("Take medications", false))
-        taskList.add(TaskData("Water the flower", true))
-        taskList.add(TaskData("Wash dishes", false))
-        taskList.add(TaskData("Take medications", false))
-        taskList.add(TaskData("Water the flower", true))
-        taskList.add(TaskData("Wash dishes", false))
+        taskList.add(TaskData("Take medications"))
+        taskList.add(TaskData("Water the flower"))
+        taskList.add(TaskData("Wash dishes"))
+        taskList.add(
+            TaskData(
+                "Take medications Take medications Take medications Take medications"
+            )
+        )
+        taskList.add(TaskData("Water the flower"))
+        taskList.add(TaskData("Wash dishes"))
+        taskList.add(TaskData("Take medications"))
+        taskList.add(TaskData("Water the flower"))
+        taskList.add(TaskData("Wash dishes Wash dishes Wash dishes"))
+        taskList.add(TaskData("Take medications"))
+        taskList.add(TaskData("Water the flower"))
+        taskList.add(TaskData("Wash dishes"))
+        taskList.add(TaskData("Take medications"))
+        taskList.add(TaskData("Water the flower"))
+        taskList.add(TaskData("Wash dishes"))
         return taskList
     }
 }
