@@ -47,22 +47,17 @@ class MainActivity : AppCompatActivity() {
         val circularProgressBar = findViewById<CircularProgressBar>(R.id.circularProgressBar)
         val progressText = findViewById<TextView>(R.id.textProgress)
 
-        val step = 100.toFloat() / binding.tasksRecycler.adapter!!.itemCount
+        val step: Float = 100.toFloat() / binding.tasksRecycler.adapter!!.itemCount
 
         circularProgressBar.apply {
-            if (taskItem.taskStatus) {
-                progressText.text = getString(
-                    R.string.progress_text,
-                    (progress + step).roundToInt()
-                )
-                setProgressWithAnimation(progress + step, 1000)
-            } else {
-                progressText.text = getString(
-                    R.string.progress_text,
-                    (progress - step).roundToInt()
-                )
-                setProgressWithAnimation(progress - step, 1000)
-            }
+            val newProgress: Float = if (taskItem.taskStatus) progress + step else progress - step
+
+            progressText.text = getString(
+                R.string.progress_text,
+                (newProgress).roundToInt()
+            )
+            setProgressWithAnimation(newProgress, 1000)
+
         }
 
 
