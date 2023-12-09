@@ -20,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        initRecycler(binding = binding)
+
+
+    }
+
+    private fun initRecycler(binding: ActivityMainBinding) {
         binding.tasksRecycler.layoutManager = LinearLayoutManager(this)
 
         binding.tasksRecycler.setHasFixedSize(true)
@@ -30,8 +36,6 @@ class MainActivity : AppCompatActivity() {
                 taskItem
             )
         }
-
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
