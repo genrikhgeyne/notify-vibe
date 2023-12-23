@@ -1,5 +1,7 @@
 package com.example.polytechandroidclasses
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -8,12 +10,14 @@ import androidx.appcompat.widget.AppCompatEditText
 class MainActivity : AppCompatActivity() {
     private var textValue = ""
     private lateinit var textEdit: AppCompatEditText
+    private lateinit var textEditPhone: AppCompatEditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         textEdit = findViewById(R.id.edittext_text)
         textValue = textEdit.text.toString()
+        textEditPhone = findViewById(R.id.edittext_phone)
 
         val textButton = findViewById<Button>(R.id.button_text)
         val phoneButton = findViewById<Button>(R.id.button_phone)
@@ -23,13 +27,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         phoneButton.setOnClickListener {
-//            requestLocationPermission()
+            callSomewhere()
         }
     }
 
     private fun startAnotherActivityWithText() {
         // starting explicit intents with data
         val intent = AnotherActivity.createIntent(this, textEdit.text.toString())
+        startActivity(intent)
+    }
+
+    private fun callSomewhere() {
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = Uri.parse("tel:" + textEditPhone.text)
+        }
         startActivity(intent)
     }
 
