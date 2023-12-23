@@ -2,6 +2,7 @@ package com.example.polytechandroidclasses
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.widget.AppCompatEditText
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +14,23 @@ class MainActivity : AppCompatActivity() {
 
         textEdit = findViewById(R.id.edittext_text)
         textValue = textEdit.text.toString()
+
+        val textButton = findViewById<Button>(R.id.button_text)
+        val phoneButton = findViewById<Button>(R.id.button_phone)
+
+        textButton.setOnClickListener {
+            startAnotherActivityWithText()
+        }
+
+        phoneButton.setOnClickListener {
+//            requestLocationPermission()
+        }
+    }
+
+    private fun startAnotherActivityWithText() {
+        // starting explicit intents with data
+        val intent = AnotherActivity.createIntent(this, textEdit.text.toString())
+        startActivity(intent)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
