@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         textEdit = findViewById(R.id.edittext_text)
-        textValue = textEdit.text.toString()
+//        textValue = textEdit.text.toString()
         textEditPhone = findViewById(R.id.edittext_phone)
 
         val textButton = findViewById<Button>(R.id.button_text)
@@ -59,13 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val SAVED_STRING_KEY = "SAVED_TEXT_KEY"
-//        const val EXTRA_DATA = "EXTRA_DATA"
-//
-//        fun createIntent(context: Context, data: String): Intent {
-//            return Intent(context, SecondActivity::class.java)
-//                .putExtra(EXTRA_DATA, data)
-//        }
+        private const val SAVED_STRING_KEY = "SAVED_TEXT_KEY"
     }
 
 }
